@@ -31,7 +31,7 @@ The API should return the following JSON response on success:
 }
 ```
 
-Please propose JSON responses for any errors that might occur.
+JSON responses for any errors that might occur.
 
 **2. As a user, I need an API to retrieve the friends list for an email address.**
 
@@ -56,7 +56,7 @@ The API should return the following JSON response on success:
 }
 ```
 
-Please propose JSON responses for any errors that might occur.
+JSON responses for any errors that might occur.
 
 **3. As a user, I need an API to retrieve the common friends list between two email addresses.**
 
@@ -85,7 +85,7 @@ The API should return the following JSON response on success:
 }
 ```
 
-Please propose JSON responses for any errors that might occur.
+JSON responses for any errors that might occur.
 
 **4. As a user, I need an API to subscribe to updates from an email address.**
 
@@ -108,7 +108,7 @@ The API should return the following JSON response on success:
 }
 ```
 
-Please propose JSON responses for any errors that might occur.
+JSON responses for any errors that might occur.
 
 **5. As a user, I need an API to block updates from an email address.**
 
@@ -134,7 +134,7 @@ The API should return the following JSON response on success:
 }
 ```
 
-Please propose JSON responses for any errors that might occur.
+JSON responses for any errors that might occur.
 
 **6. As a user, I need an API to retrieve all email addresses that can receive updates from an email address.**
 
