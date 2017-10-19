@@ -14,13 +14,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserSubscriptionService {
     @Autowired
-    private UserInfoDAO userinfodao;
+    private UserInfoService userinfoservice;
     @Autowired
     private UserSubscriptionDAO usersubdao;
 
     public Integer subscribeUser(UserInfoDTO userdto1, UserInfoDTO userdto2) {
         UserSubscription usersub=updateSubscription(userdto1,userdto2,false);
-        if (usersub.getId()==-1){
+        if (usersub==null){
             throw new SubscriptionExistException(userdto1.getEmail(),userdto2.getEmail());
         }
         usersubdao.save(usersub);
@@ -31,7 +31,7 @@ public class UserSubscriptionService {
 
         UserSubscription usersub=updateSubscription(userdto1,userdto2,true);
 
-        if (usersub.getId()==-1){
+        if (usersub==null){
             throw new BlockExistException(userdto1.getEmail(),userdto2.getEmail());
         }
         usersubdao.save(usersub);
@@ -41,11 +41,9 @@ public class UserSubscriptionService {
 
 
     private UserSubscription updateSubscription(UserInfoDTO userdto1, UserInfoDTO userdto2, boolean block){
-        UserInfo userinfo1=userinfodao.findByEmail(userdto1.getEmail());
-        int userid1=userinfo1.getId();
+        int userid1=userinfoservice.getUserID(userdto1);
 
-        UserInfo userinfo2=userinfodao.findByEmail(userdto2.getEmail());
-        int userid2=userinfo2.getId();
+        int userid2=userinfoservice.getUserID(userdto2);
 
         UserSubscription usersub=usersubdao.findDistinctByRequestorAndTarget(userid1,userid2);
         if (usersub ==null) {
@@ -56,7 +54,7 @@ public class UserSubscriptionService {
         }
         else {
             if ((block && usersub.isBlocked())||(!block && !usersub.isBlocked())) {
-                usersub.setId(-1);
+                return null;
             }
             else{
                 usersub.setBlocked(block);
