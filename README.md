@@ -23,7 +23,7 @@ Steps
 If Windows 7 and below use Dockers ToolBox (https://www.docker.com/products/docker-toolbox).
 3) Run Docker Composer: docker-compose up -d
 
-### How to Test
+#### How to Test
 1) Download Postman (https://www.getpostman.com/postman)
 2) Key in URL along with the API request as well as setting the header to cater to JSON Content Type Request
 
@@ -32,6 +32,16 @@ If Windows 7 and below use Dockers ToolBox (https://www.docker.com/products/dock
 3) Key in JSON Request Body (select Raw option in radio button) and click on Send
 
 ![PostmanRequest](images/sample2.png)
+
+#### Technical Approach
+
+This project is developed using Spring Boot due to familiarity with Spring Framework. MySQL is used as it is an open sourced and widely used database.
+ 
+Due to requirements for 1 step command to run API locally. 2 Docker containers would be required (1 for MySQL database server and 1 for Spring Boot Application)
+
+1 thing of note for this project is the connection between 2 users, as it is bidirectional, user1 column of the connection table will always be of lower number compared to user2 column. 
+
+This rule is enforced to ensure there will always be only 1 row for each connection between users
 
 #### User Stories
 
