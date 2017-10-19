@@ -1,0 +1,36 @@
+version: '3.0'
+services:
+  mysqlfriend:
+    build:
+      context: .
+      dockerfile: docker/mysql/Dockerfile
+    image: friend/mysql:v1
+    container_name: mysqlfriend
+    hostname: mysqlfriend
+    environment:
+      - MYSQL_ROOT_PASSWORD=passw0rd
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306
+  friends:
+    build:
+      context: .
+      dockerfile: docker/friendmgmt/Dockerfile
+    depends_on:
+      - mysqlfriend
+    image: friend/friends:v1
+    container_name: friends
+    hostname: friends
+    environment:
+      - DATABASE_HOST=mysqlfriend
+      - DATABASE_USER=user
+      - DATABASE_PORT=3306
+      - DATABASE_PASSWORD=passw0rd
+      - DATABASE_NAME=friends
+    ports:
+      - "8080:8080"
+    expose:
+      - 8080
+    volumes:
+      - $USERPROFILE/.m2/repository:/root/.m2/repository
